@@ -1,6 +1,6 @@
 "use client";
 
-import { useApp } from "@/app/layout";
+import { useApp } from "@/app/components/AppProvider";
 import { tokenizeWithAnnotations } from "@/lib/annotations";
 import {
   AlertTriangle,

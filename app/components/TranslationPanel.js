@@ -1,6 +1,6 @@
 "use client";
 
-import { useApp } from "@/app/layout";
+import { useApp } from "@/app/components/AppProvider";
 import { detectTerms, tokenizeWithTerms } from "@/lib/terminology";
 import { translateWithDeepSeek } from "@/lib/deepseek";
 import { applyRules } from "@/lib/rules";

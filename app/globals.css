@@ -4,6 +4,8 @@
 
 :root {
   --brand-600: #1d4ed8;
+  --font-zh: "SimSun", "宋体", serif;
+  --font-en: "Times New Roman", "Times", serif;
 }
 
 * {
@@ -12,10 +14,55 @@
 
 body {
   margin: 0;
-  font-family: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, sans-serif;
+  font-family: "SimSun", "宋体", "Times New Roman", "Times", serif;
   background: #f8fafc;
   color: #1e293b;
+}
+
+/* ===== 全局字体规则 ===== */
+
+/* 中文内容默认使用宋体 */
+[lang="zh-CN"],
+[lang="zh"],
+.lang-zh,
+textarea.lang-zh,
+input.lang-zh {
+  font-family: "SimSun", "宋体", serif;
+}
+
+/* 英文内容使用 Times New Roman */
+.lang-en,
+textarea.lang-en,
+input.lang-en {
+  font-family: "Times New Roman", "Times", serif;
+}
+
+/* 所有输入框、textarea 默认使用宋体（因为项目主要输入中文） */
+textarea,
+input[type="text"],
+input[type="search"] {
+  font-family: "SimSun", "宋体", serif;
+}
+
+/* 英文译文区域使用 Times New Roman */
+.en-content,
+.translated-output {
+  font-family: "Times New Roman", "Times", serif;
+}
+
+/* ===== 全局布局工具类 ===== */
+.page-centered {
+  @apply max-w-5xl mx-auto w-full;
+}
+
+.input-horizontal {
+  @apply w-full;
+  min-height: 180px;
+}
+
+.input-horizontal-sm {
+  @apply w-full;
+  min-height: 120px;
 }
 
 /* 术语高亮 */
@@ -89,11 +136,19 @@ body {
   background: #94a3b8;
 }
 
-/* 输入框样式 */
-textarea.translate-input {
-  resize: none;
+/* 输入框基础样式 — 横向长方形 */
+textarea.translate-input,
+textarea.review-input {
+  resize: vertical;
   line-height: 1.8;
-  font-size: 15px;
+  font-size: 16px;
+  font-family: "SimSun", "宋体", serif;
+  min-height: 200px;
+}
+
+/* 英文输入区域字体 */
+textarea.en-input {
+  font-family: "Times New Roman", "Times", serif;
 }
 
 /* 动画 */

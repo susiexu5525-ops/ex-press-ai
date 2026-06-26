@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useApp } from "@/app/layout";
+import { useApp } from "@/app/components/AppProvider";
 import { getTerms, setTerms } from "@/lib/storage";
 import {
   X,
