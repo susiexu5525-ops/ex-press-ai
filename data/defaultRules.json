@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "type": "school",
+    "name": "校名统一：避免使用 school",
+    "pattern": "school",
+    "replacement": "university",
+    "severity": "强制",
+    "note": "我校为 university，外宣材料中必须使用 university 而非 school"
+  },
+  {
+    "id": 2,
+    "type": "school",
+    "name": "不提 985/211 工程",
+    "pattern": "985|211|Project 985|Project 211",
+    "replacement": "leading",
+    "severity": "强制",
+    "note": "国家已取消 985/211 分类，统一使用 Double First-Class 或 leading university"
+  },
+  {
+    "id": 3,
+    "type": "mentor",
+    "name": "避免过度使用 We",
+    "pattern": "We are proud",
+    "replacement": "The university takes pride",
+    "severity": "建议",
+    "note": "外宣材料中减少第一人称，增强客观性"
+  },
+  {
+    "id": 4,
+    "type": "school",
+    "name": "中国特色的英文表达",
+    "pattern": "Chinese characteristics",
+    "replacement": "Chinese context",
+    "severity": "强制",
+    "note": "在国际语境中，context 比 characteristics 更易被理解"
+  },
+  {
+    "id": 5,
+    "type": "mentor",
+    "name": "数据要有出处",
+    "pattern": "many|a lot of|lots of",
+    "replacement": "numerous",
+    "severity": "建议",
+    "note": "使用 more precise language，必要时附数据来源"
+  },
+  {
+    "id": 6,
+    "type": "school",
+    "name": "校训英文标准化",
+    "pattern": "seeking truth|pursuing truth",
+    "replacement": "Seeking Truth",
+    "severity": "强制",
+    "note": "校训英译需统一为大写格式"
+  },
+  {
+    "id": 7,
+    "type": "school",
+    "name": "避免政治敏感性表述",
+    "pattern": "party leadership|the Party",
+    "replacement": "institutional leadership",
+    "severity": "强制",
+    "note": "对外宣传材料中采用更中性的表达方式"
+  },
+  {
+    "id": 8,
+    "type": "mentor",
+    "name": "保持时态一致性",
+    "pattern": "",
+    "replacement": "",
+    "severity": "建议",
+    "note": "全篇统一使用现在时或过去时，不得混用"
+  }
+]
