@@ -80,9 +80,9 @@ export default function AppProvider({ children }) {
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
-      <Navbar />
-      <main className="flex flex-col items-center px-4 py-8">
-        <div className="page-centered">{children}</div>
+      {/* Navbar 已隐藏 —— 主页使用独立的 fixed 一屏锁死布局 */}
+      <main className="flex flex-col items-center">
+        {children}
       </main>
       {state.showTermManager && <TerminologyManager />}
       {state.showRuleManager && <RuleManager />}

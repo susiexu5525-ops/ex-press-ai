@@ -134,55 +134,85 @@ export default function TranslatePage() {
   const tokens = tokenizeWithTerms(state.sourceText, state.detectedTerms);
 
   return (
-    <div className="w-full space-y-6">
-      {/* 顶部返回 */}
-      <button
-        onClick={() => router.push("/")}
-        className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-700 transition-colors"
-      >
-        <ArrowLeft size={16} />
-        返回首页
-      </button>
+    <div className="fixed inset-0 w-screen h-screen overflow-hidden flex flex-col p-6 bg-[#EFECE4] select-none box-border z-0">
 
-      {/* 标题 */}
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md shadow-blue-500/20">
-          <Send size={20} className="text-white" />
-        </div>
-        <div>
-          <h1 className="text-xl font-bold text-slate-800">AI 翻译</h1>
-          <p className="text-xs text-slate-400">中文新闻稿 → 英文译文</p>
-        </div>
+      {/* 全局复古多重碎纸拼贴背景 — 与主页完全一致 */}
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10rem] left-[10%] w-[45vw] h-[25rem] bg-[#db5d8f] rounded-[30%_70%_40%_60%/_50%_30%_70%_50%] opacity-90" />
+        <div className="absolute top-[-5rem] left-[-10rem] w-[35vw] h-[35rem] bg-[#d94e1d] rounded-[40%_60%_30%_70%/_60%_40%_70%_30%] opacity-95" />
+        <div className="absolute top-[-8rem] right-[-10rem] w-[50vw] h-[45rem] bg-[#2496c7] rounded-[50%_50%_30%_70%/_40%_60%_40%_60%] opacity-90" />
+        <div className="absolute bottom-[-12rem] left-[-5rem] w-[45vw] h-[45rem] bg-[#e6c412] rounded-[70%_30%_60%_40%/_50%_50%_60%_40%] opacity-95" />
+        <div className="absolute bottom-[-10rem] right-[-8rem] w-[50vw] h-[45rem] bg-[#008f85] rounded-[40%_60%_50%_50%/_60%_40%_60%_40%] opacity-90" />
       </div>
 
-      {/* 输入区域 — 横向长方形，单列居中 */}
-      <div className="bg-[#faf8f5] rounded-sm border border-[#e2dec9] shadow-sm p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-[#3d3226] flex items-center gap-2 font-mono tracking-wide">
-            <span className="w-2 h-2 bg-[#5a4c3b]"></span>
-            中文原文
-          </h2>
-          <button
-            onClick={handleFillSample}
-            className="text-xs text-[#8c7b6a] hover:text-[#5a4c3b] underline underline-offset-2"
-          >
-            填入示例
-          </button>
+      {/* 左上角 Header 区域 ── 高对比度复古排版修复版 */}
+      <div className="flex flex-col gap-3 flex-shrink-0 mb-4 select-none">
+        
+        {/* 1. 返回桌面按钮 ── 火漆白字标签 */}
+        <button
+          onClick={() => router.push("/")}
+          className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-[#fbf9f3] bg-[#2c241c]/60 hover:bg-[#2c241c]/90 px-2.5 py-1 rounded-sm w-fit shadow-sm backdrop-blur-sm border border-white/10 transition-all active:scale-95"
+        >
+          <span>←</span> BACK TO DESK
+        </button>
+
+        {/* 2. 标题组合区 ── 象牙白便签底衬，破开深色背景 */}
+        <div className="bg-[#fbf9f3]/90 border border-[#decfa6]/50 shadow-md p-3 py-2.5 rounded-[4px_10px_3px_6px] max-w-xs flex items-center gap-3 relative overflow-hidden backdrop-blur-sm">
+          {/* 侧边装饰红条 ── 模拟老式记事本 */}
+          <div className="absolute top-0 bottom-0 left-0 w-1 bg-[#c85a3e]" />
+          
+          {/* 图标区 */}
+          <div className="w-10 h-10 bg-[#2c241c] rounded-md flex items-center justify-center text-[#decfa6] flex-shrink-0 shadow-inner">
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
+          </div>
+
+          {/* 文字区 */}
+          <div className="flex flex-col">
+            <h1 className="font-serif font-black text-[#2c241c] text-xl tracking-wider flex items-center gap-1">
+              AI 翻译 <span className="font-sans text-xs text-[#8c7e6c] italic font-light lowercase">translate</span>
+            </h1>
+            <p className="font-mono text-[10px] tracking-widest text-[#7c6e5c] uppercase mt-0.5">
+              新闻初稿投递台
+            </p>
+          </div>
         </div>
 
-        <textarea
-          value={state.sourceText}
-          onChange={(e) =>
-            dispatch({ type: "SET_SOURCE_TEXT", payload: e.target.value })
-          }
-          placeholder="请输入中文新闻稿内容..."
-          rows={10}
-          className="w-full p-5 border border-[#e2dec9] rounded-sm
-            bg-[#f4f1ea] focus:outline-none focus:border-[#c9c1ad]
-            text-[#3d3226] placeholder:text-[#b8b09c] transition-colors"
-          style={{ fontFamily: "SimSun, STSong, serif" }}
-          spellCheck={false}
-        />
+      </div>
+
+      {/* 中央工作区 — 百年陈旧老稿纸容器 */}
+      <div className="h-[75vh] bg-[#fbf9f3] border border-[#e3ded0] rounded-[6px_12px_8px_10px] shadow-[3px_6px_20px_rgba(61,50,38,0.1)] flex flex-col p-6 overflow-y-auto flex-shrink-0">
+
+        {/* 输入区域 */}
+        <div className="mb-5 flex-shrink-0">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-semibold text-[#3d3226] flex items-center gap-2 font-mono tracking-wide">
+              <span className="w-2 h-2 bg-[#5a4c3b]"></span>
+              中文原文
+            </h2>
+            <button
+              onClick={handleFillSample}
+              className="text-xs text-[#8c7b6a] hover:text-[#5a4c3b] underline underline-offset-2"
+            >
+              填入示例
+            </button>
+          </div>
+
+          <textarea
+            value={state.sourceText}
+            onChange={(e) =>
+              dispatch({ type: "SET_SOURCE_TEXT", payload: e.target.value })
+            }
+            placeholder="请输入中文新闻稿内容..."
+            rows={10}
+            className="w-full p-5 border border-[#decfa6]/60 rounded-sm
+              bg-[#fdfcf7] focus:outline-none focus:border-[#c9c1ad]
+              text-[#3d3226] placeholder:text-[#b8b09c] transition-colors
+              shadow-[inset_1px_2px_6px_rgba(210,193,155,0.2)]"
+            style={{ fontFamily: "SimSun, STSong, serif" }}
+            spellCheck={false}
+          />
 
         {/* 文件上传 */}
         <div className="mt-3">
@@ -266,9 +296,7 @@ export default function TranslatePage() {
           <button
             onClick={handleTranslate}
             disabled={!state.sourceText.trim() || state.isTranslating}
-            className="flex items-center gap-2 px-6 py-2.5 bg-[#5a4c3b] text-[#f4f1ea] text-sm font-medium font-mono
-              rounded-sm hover:bg-[#3d3226] disabled:opacity-50 disabled:cursor-not-allowed
-              transition-colors shadow-sm active:translate-y-px"
+            className="bg-[#c85a3e] hover:bg-[#b04b30] text-[#fbf9f3] font-serif font-bold tracking-widest px-6 py-2.5 rounded-[4px_8px_4px_6px] shadow-md transition-all active:scale-95 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
           >
             {state.isTranslating ? (
               <>
@@ -285,105 +313,115 @@ export default function TranslatePage() {
         </div>
       </div>
 
-      {/* 译文输出 — 横向长方形，单列居中 */}
-      <div className="bg-[#f4f1ea] rounded-sm border border-[#e2dec9] shadow-sm p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-[#3d3226] flex items-center gap-2 font-mono tracking-wide">
-            <span className="w-2 h-2 bg-[#4a6b5d]"></span>
-            英文译文
-          </h2>
-          {state.translatedText && (
-            <button
-              onClick={handleCopy}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#8c7b6a] hover:text-[#5a4c3b] hover:bg-[#e6dfd3] rounded-sm transition-colors"
-            >
-              {copied ? (
-                <>
-                  <Check size={14} className="text-[#4a6b5d]" />
-                  已复制
-                </>
-              ) : (
-                <>
-                  <Copy size={14} />
-                  复制译文
-                </>
-              )}
-            </button>
-          )}
+        {/* 分隔线 */}
+        <div className="flex items-center gap-3 my-5 flex-shrink-0">
+          <div className="h-px flex-1 bg-[#e3ded0]" />
+          <span className="font-mono text-[10px] tracking-widest text-[#b8b09c] uppercase">译文输出</span>
+          <div className="h-px flex-1 bg-[#e3ded0]" />
         </div>
 
-        {state.translatedText ? (
-          <div
-            className="w-full min-h-[200px] p-5 border border-[#e2dec9] rounded-sm
-              bg-[#faf8f5] overflow-auto leading-relaxed text-[16px] text-[#3d3226] font-mono"
-          >
-            {state.translatedText}
-          </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center min-h-[200px] text-center border border-dashed border-[#d8d2c2] rounded-sm bg-[#faf8f5]">
-            {state.isTranslating ? (
-              <div className="flex items-center gap-2 text-[#8c7b6a]">
-                <RotateCw size={18} className="animate-spin" />
-                <span className="text-sm font-mono">翻译中...</span>
-              </div>
-            ) : (
-              <>
-                <div className="w-12 h-12 bg-[#f4f1ea] rounded-sm flex items-center justify-center mb-3 border border-[#e2dec9]">
-                  <span className="text-xl">🌐</span>
-                </div>
-                <p className="text-[#8c7b6a] text-sm">译文将在此显示</p>
-                <p className="text-[#b8b09c] text-xs mt-1" style={{ fontFamily: "SimSun, STSong, serif" }}>
-                  输入中文后点击「AI 翻译」
-                </p>
-              </>
+        {/* 译文输出区 */}
+        <div className="flex-shrink-0">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-semibold text-[#3d3226] flex items-center gap-2 font-mono tracking-wide">
+              <span className="w-2 h-2 bg-[#4a6b5d]"></span>
+              英文译文
+            </h2>
+            {state.translatedText && (
+              <button
+                onClick={handleCopy}
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#8c7b6a] hover:text-[#5a4c3b] hover:bg-[#e6dfd3] rounded-sm transition-colors"
+              >
+                {copied ? (
+                  <>
+                    <Check size={14} className="text-[#4a6b5d]" />
+                    已复制
+                  </>
+                ) : (
+                  <>
+                    <Copy size={14} />
+                    复制译文
+                  </>
+                )}
+              </button>
             )}
           </div>
-        )}
 
-        {/* 规则应用摘要 */}
-        {state.appliedRules.length > 0 && (
-          <div className="mt-4 p-3 bg-[#f2f5f3] rounded-sm border border-[#d0d9d3]">
-            <div className="text-xs font-medium text-[#3d5a4a] mb-2 font-mono">
-              规则自动应用 ({state.appliedRules.length} 条)
+          {state.translatedText ? (
+            <div
+              className="w-full min-h-[160px] p-5 border border-[#decfa6]/60 rounded-sm
+                bg-[#fdfcf7] overflow-auto leading-relaxed text-[16px] text-[#3d3226]
+                shadow-[inset_1px_2px_6px_rgba(210,193,155,0.2)]"
+              style={{ fontFamily: "SimSun, STSong, serif" }}
+            >
+              {state.translatedText}
             </div>
-            <div className="flex flex-wrap gap-1">
-              {state.appliedRules.map((rule) => (
-                <span
-                  key={rule.id}
-                  className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-sm
-                    bg-[#faf8f5] text-[#3d3226] border border-[#e2dec9]"
-                >
-                  {rule.name}
-                  <span className="text-[#b8b09c]">|</span>
-                  <span className="line-through text-[#b8b09c] text-[10px]">
-                    {rule.original}
+          ) : (
+            <div className="flex flex-col items-center justify-center min-h-[160px] text-center border border-dashed border-[#d8d2c2] rounded-sm bg-[#fdfcf7] shadow-[inset_1px_2px_6px_rgba(210,193,155,0.2)]">
+              {state.isTranslating ? (
+                <div className="flex items-center gap-2 text-[#8c7b6a]">
+                  <RotateCw size={18} className="animate-spin" />
+                  <span className="text-sm font-mono">翻译中...</span>
+                </div>
+              ) : (
+                <>
+                  <div className="w-12 h-12 bg-[#f4f1ea] rounded-full flex items-center justify-center mb-3 border border-[#e2dec9]">
+                    <span className="text-xl">🌐</span>
+                  </div>
+                  <p className="text-[#8c7b6a] text-sm">译文将在此显示</p>
+                  <p className="text-[#b8b09c] text-xs mt-1" style={{ fontFamily: "SimSun, STSong, serif" }}>
+                    输入中文后点击「AI 翻译」
+                  </p>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* 规则应用摘要 */}
+          {state.appliedRules.length > 0 && (
+            <div className="mt-4 p-3 bg-[#f2f5f3] rounded-sm border border-[#d0d9d3]">
+              <div className="text-xs font-medium text-[#3d5a4a] mb-2 font-mono">
+                规则自动应用 ({state.appliedRules.length} 条)
+              </div>
+              <div className="flex flex-wrap gap-1">
+                {state.appliedRules.map((rule) => (
+                  <span
+                    key={rule.id}
+                    className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-sm
+                      bg-[#faf8f5] text-[#3d3226] border border-[#e2dec9]"
+                  >
+                    {rule.name}
+                    <span className="text-[#b8b09c]">|</span>
+                    <span className="line-through text-[#b8b09c] text-[10px]">
+                      {rule.original}
+                    </span>
+                    <span>→</span>
+                    <span className="font-medium font-mono">{rule.replaced}</span>
                   </span>
-                  <span>→</span>
-                  <span className="font-medium font-mono">{rule.replaced}</span>
-                </span>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* 审校批注摘要 */}
-        {state.annotations.length > 0 && (
-          <div className="mt-4 p-3 bg-[#fdf5f3] rounded-sm border border-[#e8d0ca]">
-            <div className="text-xs font-medium text-[#8c4a32] mb-1 font-mono">
-              审校批注 ({state.annotations.length} 条)
+          {/* 审校批注摘要 */}
+          {state.annotations.length > 0 && (
+            <div className="mt-4 p-3 bg-[#fdf5f3] rounded-sm border border-[#e8d0ca]">
+              <div className="text-xs font-medium text-[#8c4a32] mb-1 font-mono">
+                审校批注 ({state.annotations.length} 条)
+              </div>
+              <p className="text-xs text-[#8c7b6a]" style={{ fontFamily: "SimSun, STSong, serif" }}>
+                请前往
+                <button
+                  onClick={() => router.push("/review")}
+                  className="text-[#5a4c3b] underline mx-1 font-medium"
+                >
+                  审校页面
+                </button>
+                查看详细批注
+              </p>
             </div>
-            <p className="text-xs text-[#8c7b6a]" style={{ fontFamily: "SimSun, STSong, serif" }}>
-              请前往
-              <button
-                onClick={() => router.push("/review")}
-                className="text-[#5a4c3b] underline mx-1 font-medium"
-              >
-                审校页面
-              </button>
-              查看详细批注
-            </p>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
