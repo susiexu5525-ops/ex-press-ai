@@ -34,6 +34,10 @@ const initialState = {
   // 段落级CAT segments（AppProvider 一次性生成，页面只做渲染）
   // 结构: [{ id, source, target, annotations: [...] }]
   segments: [],
+
+  // 参考语料（用户上传的英文论文/学术文章，用于辅助AI审校）
+  // 结构: { name: string, content: string }
+  referenceCorpus: null,
 };
 
 /**
@@ -139,6 +143,10 @@ function reducer(state, action) {
         ),
       };
     }
+    case "SET_REFERENCE_CORPUS":
+      return { ...state, referenceCorpus: action.payload };
+    case "CLEAR_REFERENCE_CORPUS":
+      return { ...state, referenceCorpus: null };
     case "RESET":
       return {
         ...initialState,

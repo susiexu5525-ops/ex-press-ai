@@ -13,6 +13,9 @@ import {
   Lightbulb,
   CheckCircle2,
   Trash2,
+  Upload,
+  FileText,
+  X,
 } from "lucide-react";
 import { useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
@@ -62,8 +65,67 @@ export default function ReviewPage() {
   const [error, setError] = useState("");
   const [activeAnnotationId, setActiveAnnotationId] = useState(null);
   const [reviewExecuted, setReviewExecuted] = useState(false);
+  const [corpusError, setCorpusError] = useState("");
   const sourceRef = useRef(null);
   const targetRef = useRef(null);
+  const fileInputRef = useRef(null);
+
+  // ============ 参考语料上传 ============
+  const handleFileUpload = useCallback(
+    (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      setCorpusError("");
+
+      const ext = file.name.split(".").pop()?.toLowerCase();
+
+      // 仅支持 .txt
+      if (ext !== "txt") {
+        setCorpusError(
+          ext === "docx"
+            ? "暂不支持 .docx 格式，请转换为 .txt 后上传"
+            : ext === "pdf"
+            ? "暂不支持 .pdf 格式，请转换为 .txt 后上传"
+            : `暂不支持 .${ext} 格式，请使用 .txt 文件`
+        );
+        // 重置 input 以便重新选择同一文件
+        if (fileInputRef.current) fileInputRef.current.value = "";
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const content = event.target.result;
+        if (typeof content !== "string" || !content.trim()) {
+          setCorpusError("文件内容为空，请检查文件");
+          return;
+        }
+
+        dispatch({
+          type: "SET_REFERENCE_CORPUS",
+          payload: {
+            name: file.name,
+            content: content.trim(),
+          },
+        });
+      };
+      reader.onerror = () => {
+        setCorpusError("文件读取失败，请重试");
+      };
+      reader.readAsText(file, "UTF-8");
+
+      // 重置 input
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    },
+    [dispatch]
+  );
+
+  const handleClearCorpus = useCallback(() => {
+    dispatch({ type: "CLEAR_REFERENCE_CORPUS" });
+    setCorpusError("");
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  }, [dispatch]);
 
   // ============ 核心操作：执行审校 ============
   const handleReview = async () => {
@@ -94,7 +156,11 @@ export default function ReviewPage() {
         dispatch({ type: "SET_TRANSLATED_TEXT", payload: finalText });
       }
 
-      const annotations = await mockReview(finalText, appliedRules);
+      const annotations = await mockReview(
+        finalText,
+        appliedRules,
+        state.referenceCorpus
+      );
       dispatch({ type: "SET_ANNOTATIONS", payload: annotations });
 
       // 一次性生成 segments
@@ -213,6 +279,62 @@ export default function ReviewPage() {
               双栏 CAT 编辑 · 原文译文对照
             </p>
           </div>
+        </div>
+
+        {/* ===== 参考语料上传区域 ===== */}
+        <div className="bg-[#fbf9f3]/90 border border-[#decfa6]/50 shadow-md p-3 py-2 rounded-[4px_10px_3px_6px] w-fit backdrop-blur-sm">
+          <div className="flex items-center gap-2 flex-wrap">
+            {/* 隐藏的文件 input */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".txt"
+              onChange={handleFileUpload}
+              className="hidden"
+            />
+
+            {/* 上传按钮 */}
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-[#5a4c3b] bg-[#f4f1ea] hover:bg-[#e8e4d8] border border-[#decfa6]/60 rounded-sm transition-colors active:scale-95"
+              title="上传英文论文作为参考语料"
+            >
+              <Upload size={14} />
+              <span className="hidden sm:inline">参考语料上传</span>
+              <span className="sm:hidden">语料</span>
+            </button>
+
+            {/* 已上传状态 */}
+            {state.referenceCorpus ? (
+              <div className="flex items-center gap-2">
+                <span className="flex items-center gap-1.5 text-xs text-[#3d3226] font-mono bg-[#f2f5f3] px-2 py-1 rounded-sm border border-[#c4d4c0]">
+                  <FileText size={12} className="text-[#4a6b5d]" />
+                  <span className="max-w-[200px] truncate" title={state.referenceCorpus.name}>
+                    {state.referenceCorpus.name}
+                  </span>
+                </span>
+                <button
+                  onClick={handleClearCorpus}
+                  className="flex items-center justify-center w-5 h-5 rounded-sm text-[#8c7b6a] hover:text-[#c85a3e] hover:bg-[#fdf0ed] transition-colors"
+                  title="移除参考语料"
+                >
+                  <X size={12} />
+                </button>
+              </div>
+            ) : (
+              <span className="text-[10px] text-[#b8b09c] font-mono tracking-wide hidden sm:inline">
+                .txt 英文论文
+              </span>
+            )}
+          </div>
+
+          {/* 上传错误提示 */}
+          {corpusError && (
+            <div className="mt-2 flex items-start gap-1.5 p-2 bg-[#fdf0ed] rounded-sm border border-[#e8c4bc] text-[#8c4a32] text-[10px]">
+              <AlertTriangle size={12} className="mt-0.5 shrink-0" />
+              <span>{corpusError}</span>
+            </div>
+          )}
         </div>
       </div>
 
