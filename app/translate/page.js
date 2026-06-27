@@ -66,7 +66,10 @@ export default function TranslatePage() {
       dispatch({ type: "SET_ANNOTATIONS", payload: annotations });
       dispatch({ type: "SET_IS_REVIEWING", payload: false });
 
-      // 5. 保存历史
+      // 5. 生成稳定的段落级CAT segments（一次性）
+      dispatch({ type: "SET_SEGMENTS" });
+
+      // 6. 保存历史
       addHistory({
         source: state.sourceText,
         translated: finalForReview,
