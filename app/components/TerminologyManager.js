@@ -86,33 +86,33 @@ export default function TerminologyManager() {
     : terms;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 animate-fade-in">
+      <div className="bg-[#faf8f5] rounded-sm shadow-[0_2px_10px_rgba(0,0,0,0.12)] w-full max-w-2xl max-h-[80vh] flex flex-col animate-fade-in border border-[#e2dec9]">
         {/* Header */}
-        <div className="flex items-center justify-between p-5 border-b border-slate-100">
+        <div className="flex items-center justify-between p-5 border-b border-[#e2dec9]">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-amber-100 rounded-xl flex items-center justify-center">
-              <BookOpen size={18} className="text-amber-600" />
+            <div className="w-9 h-9 bg-[#FFDE17]/20 rounded-sm flex items-center justify-center">
+              <BookOpen size={18} className="text-amber-800" />
             </div>
             <div>
-              <h2 className="text-base font-semibold text-slate-800">
+              <h2 className="text-base font-semibold text-slate-700 font-mono">
                 术语库管理
               </h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-400 font-mono">
                 {terms.length} 个术语 | 自动识别原文中的术语
               </p>
             </div>
           </div>
           <button
             onClick={handleClose}
-            className="p-2 hover:bg-slate-100 rounded-xl transition-colors"
+            className="p-2 hover:bg-[#f4f1ea] rounded-sm transition-colors"
           >
             <X size={18} className="text-slate-400" />
           </button>
         </div>
 
         {/* Search + Add */}
-        <div className="p-4 border-b border-slate-100 space-y-3">
+        <div className="p-4 border-b border-[#e2dec9] space-y-3">
           <div className="relative">
             <Search
               size={14}
@@ -123,8 +123,8 @@ export default function TerminologyManager() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="搜索术语..."
-              className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-xl
-                focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-400"
+              className="w-full pl-9 pr-4 py-2 text-sm border border-[#e2dec9] rounded-sm
+                focus:outline-none focus:ring-1 focus:ring-amber-700/30 focus:border-amber-700/40 bg-white"
             />
           </div>
           <div className="flex items-center gap-2">
@@ -133,8 +133,8 @@ export default function TerminologyManager() {
               value={newZh}
               onChange={(e) => setNewZh(e.target.value)}
               placeholder="中文术语"
-              className="flex-1 px-3 py-1.5 text-sm border border-slate-200 rounded-lg
-                focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-400"
+              className="flex-1 px-3 py-1.5 text-sm border border-[#e2dec9] rounded-sm
+                focus:outline-none focus:ring-1 focus:ring-amber-700/30 focus:border-amber-700/40 bg-white"
               onKeyDown={(e) => e.key === "Enter" && handleAdd()}
             />
             <span className="text-slate-300">→</span>
@@ -143,14 +143,14 @@ export default function TerminologyManager() {
               value={newEn}
               onChange={(e) => setNewEn(e.target.value)}
               placeholder="English term"
-              className="flex-1 px-3 py-1.5 text-sm border border-slate-200 rounded-lg
-                focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-400"
+              className="flex-1 px-3 py-1.5 text-sm border border-[#e2dec9] rounded-sm
+                focus:outline-none focus:ring-1 focus:ring-amber-700/30 focus:border-amber-700/40 bg-white"
               onKeyDown={(e) => e.key === "Enter" && handleAdd()}
             />
             <button
               onClick={handleAdd}
               disabled={!newZh.trim() || !newEn.trim()}
-              className="p-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700
+              className="p-2 bg-amber-700/80 text-white rounded-sm hover:bg-amber-800
                 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               <Plus size={16} />
@@ -164,7 +164,7 @@ export default function TerminologyManager() {
             {filtered.map((term) => (
               <div
                 key={term.id}
-                className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 group transition-colors"
+                className="flex items-center gap-3 p-2.5 rounded-sm hover:bg-[#f4f1ea] group transition-colors"
               >
                 {editingId === term.id ? (
                   <>
@@ -172,8 +172,8 @@ export default function TerminologyManager() {
                       type="text"
                       value={editZh}
                       onChange={(e) => setEditZh(e.target.value)}
-                      className="flex-1 px-2 py-1 text-sm border border-brand-300 rounded-lg
-                        focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+                      className="flex-1 px-2 py-1 text-sm border border-amber-700/30 rounded-sm
+                        focus:outline-none focus:ring-1 focus:ring-amber-700/30 bg-white"
                       autoFocus
                       onKeyDown={(e) => e.key === "Enter" && handleConfirmEdit()}
                     />
@@ -182,13 +182,13 @@ export default function TerminologyManager() {
                       type="text"
                       value={editEn}
                       onChange={(e) => setEditEn(e.target.value)}
-                      className="flex-1 px-2 py-1 text-sm border border-brand-300 rounded-lg
-                        focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+                      className="flex-1 px-2 py-1 text-sm border border-amber-700/30 rounded-sm
+                        focus:outline-none focus:ring-1 focus:ring-amber-700/30 bg-white"
                       onKeyDown={(e) => e.key === "Enter" && handleConfirmEdit()}
                     />
                     <button
                       onClick={handleConfirmEdit}
-                      className="p-1.5 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                      className="p-1.5 text-green-600 hover:bg-green-50 rounded-sm transition-colors"
                     >
                       <Save size={14} />
                     </button>
@@ -199,13 +199,13 @@ export default function TerminologyManager() {
                       {term.zh}
                     </span>
                     <span className="text-slate-300">→</span>
-                    <span className="flex-1 text-sm text-slate-600">
+                    <span className="flex-1 text-sm text-slate-600 font-mono">
                       {term.en}
                     </span>
                     <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button
                         onClick={() => handleStartEdit(term)}
-                        className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+                        className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-[#f4f1ea] rounded-sm transition-colors"
                         title="编辑"
                       >
                         <svg
@@ -223,7 +223,7 @@ export default function TerminologyManager() {
                       </button>
                       <button
                         onClick={() => handleDelete(term.id)}
-                        className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                        className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-sm transition-colors"
                         title="删除"
                       >
                         <Trash2 size={14} />
@@ -234,7 +234,7 @@ export default function TerminologyManager() {
               </div>
             ))}
             {filtered.length === 0 && (
-              <div className="text-center py-8 text-slate-400 text-sm">
+              <div className="text-center py-8 text-slate-400 text-sm font-mono">
                 {search ? "没有匹配的术语" : "术语库为空，请添加术语"}
               </div>
             )}
@@ -242,10 +242,10 @@ export default function TerminologyManager() {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between p-4 border-t border-slate-100">
+        <div className="flex items-center justify-between p-4 border-t border-[#e2dec9]">
           <button
             onClick={handleReset}
-            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-red-500 transition-colors"
+            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-red-500 transition-colors font-mono"
           >
             <Undo2 size={13} />
             恢复默认
@@ -253,13 +253,13 @@ export default function TerminologyManager() {
           <div className="flex items-center gap-2">
             <button
               onClick={handleClose}
-              className="px-4 py-2 text-sm text-slate-500 hover:bg-slate-100 rounded-xl transition-colors"
+              className="px-4 py-2 text-sm text-slate-500 hover:bg-[#f4f1ea] rounded-sm transition-colors font-mono"
             >
               取消
             </button>
             <button
               onClick={handleSave}
-              className="px-4 py-2 text-sm bg-brand-600 text-white rounded-xl hover:bg-brand-700 transition-colors font-medium"
+              className="px-4 py-2 text-sm bg-amber-700/80 text-white rounded-sm hover:bg-amber-800 transition-colors font-medium font-mono"
             >
               保存
             </button>

@@ -146,8 +146,8 @@ export default function TranslatePage() {
 
       {/* 标题 */}
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center">
-          <Send size={20} className="text-brand-600" />
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md shadow-blue-500/20">
+          <Send size={20} className="text-white" />
         </div>
         <div>
           <h1 className="text-xl font-bold text-slate-800">AI 翻译</h1>
@@ -156,15 +156,15 @@ export default function TranslatePage() {
       </div>
 
       {/* 输入区域 — 横向长方形，单列居中 */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+      <div className="bg-[#faf8f5] rounded-sm border border-[#e2dec9] shadow-sm p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-brand-500"></span>
+          <h2 className="text-sm font-semibold text-[#3d3226] flex items-center gap-2 font-mono tracking-wide">
+            <span className="w-2 h-2 bg-[#5a4c3b]"></span>
             中文原文
           </h2>
           <button
             onClick={handleFillSample}
-            className="text-xs text-brand-500 hover:text-brand-700 underline underline-offset-2"
+            className="text-xs text-[#8c7b6a] hover:text-[#5a4c3b] underline underline-offset-2"
           >
             填入示例
           </button>
@@ -177,9 +177,10 @@ export default function TranslatePage() {
           }
           placeholder="请输入中文新闻稿内容..."
           rows={10}
-          className="translate-input w-full p-5 border border-slate-200 rounded-xl
-            bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-400
-            text-slate-700 placeholder:text-slate-300 transition-all"
+          className="w-full p-5 border border-[#e2dec9] rounded-sm
+            bg-[#f4f1ea] focus:outline-none focus:border-[#c9c1ad]
+            text-[#3d3226] placeholder:text-[#b8b09c] transition-colors"
+          style={{ fontFamily: "SimSun, STSong, serif" }}
           spellCheck={false}
         />
 
@@ -195,24 +196,24 @@ export default function TranslatePage() {
           />
           <label
             htmlFor="file-upload"
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium text-slate-600
-              bg-slate-50 border border-slate-200 rounded-xl cursor-pointer
-              hover:bg-slate-100 hover:border-slate-300 transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium text-[#5a4c3b]
+              bg-[#f4f1ea] border border-[#e2dec9] rounded-sm cursor-pointer
+              hover:bg-[#e6dfd3] hover:border-[#c9c1ad] transition-colors"
           >
             <Upload size={14} />
             上传文件参考 (.txt)
           </label>
 
           {uploadedFile && (
-            <div className="mt-2 flex items-center gap-2 text-xs bg-brand-50 text-brand-700 px-3 py-1.5 rounded-lg border border-brand-200">
+            <div className="mt-2 flex items-center gap-2 text-xs bg-[#f4f1ea] text-[#3d3226] px-3 py-1.5 rounded-sm border border-[#e2dec9]">
               <FileText size={14} />
-              <span className="font-medium">{uploadedFile.name}</span>
-              <span className="text-brand-400">
+              <span className="font-medium font-mono">{uploadedFile.name}</span>
+              <span className="text-[#8c7b6a]">
                 ({(uploadedFile.size / 1024).toFixed(1)} KB)
               </span>
               <button
                 onClick={removeFile}
-                className="ml-1 text-brand-400 hover:text-brand-600"
+                className="ml-1 text-[#8c7b6a] hover:text-[#5a4c3b]"
               >
                 <X size={14} />
               </button>
@@ -222,21 +223,21 @@ export default function TranslatePage() {
 
         {/* 术语检测标签 */}
         {state.detectedTerms.length > 0 && (
-          <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-xl">
-            <div className="text-xs font-medium text-amber-700 mb-2">
+          <div className="mt-3 p-3 bg-[#fdf9e7] rounded-sm border border-[#e8dba0]">
+            <div className="text-xs font-medium text-[#5a4c3b] mb-2 font-mono">
               检测到 {state.detectedTerms.length} 个术语
             </div>
             <div className="flex flex-wrap gap-1.5">
               {state.detectedTerms.map((term) => (
                 <span
                   key={`${term.id}-${term.start}`}
-                  className="inline-flex items-center gap-1 text-xs bg-white text-amber-800 px-2 py-0.5 rounded-md border border-amber-200"
+                  className="inline-flex items-center gap-1 text-xs bg-[#faf8f5] text-[#3d3226] px-2 py-0.5 rounded-sm border border-[#e2dec9]"
                   title={`${term.zh} → ${term.en}`}
                 >
-                  <span className="text-amber-500">◆</span>
+                  <span className="text-[#8c7b6a]">◆</span>
                   {term.zh}
-                  <span className="text-amber-400">→</span>
-                  <span className="text-amber-600 font-medium">{term.en}</span>
+                  <span className="text-[#8c7b6a]">→</span>
+                  <span className="text-[#5a4c3b] font-medium font-mono">{term.en}</span>
                 </span>
               ))}
             </div>
@@ -245,7 +246,7 @@ export default function TranslatePage() {
 
         {/* 错误提示 */}
         {error && (
-          <div className="mt-3 flex items-start gap-2 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-xs">
+          <div className="mt-3 flex items-start gap-2 p-3 bg-[#fdf0ed] rounded-sm border border-[#e8c4bc] text-[#8c4a32] text-xs">
             <AlertCircle size={14} className="mt-0.5 shrink-0" />
             <span>{error}</span>
           </div>
@@ -255,7 +256,7 @@ export default function TranslatePage() {
         <div className="flex items-center justify-between mt-5">
           <button
             onClick={handleClear}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#8c7b6a] hover:text-[#5a4c3b] hover:bg-[#f4f1ea] rounded-sm transition-colors"
             disabled={!state.sourceText}
           >
             <Trash2 size={14} />
@@ -265,9 +266,9 @@ export default function TranslatePage() {
           <button
             onClick={handleTranslate}
             disabled={!state.sourceText.trim() || state.isTranslating}
-            className="flex items-center gap-2 px-6 py-2.5 bg-brand-600 text-white text-sm font-medium
-              rounded-xl hover:bg-brand-700 disabled:opacity-50 disabled:cursor-not-allowed
-              transition-all shadow-sm hover:shadow-md active:scale-[0.98]"
+            className="flex items-center gap-2 px-6 py-2.5 bg-[#5a4c3b] text-[#f4f1ea] text-sm font-medium font-mono
+              rounded-sm hover:bg-[#3d3226] disabled:opacity-50 disabled:cursor-not-allowed
+              transition-colors shadow-sm active:translate-y-px"
           >
             {state.isTranslating ? (
               <>
@@ -285,20 +286,20 @@ export default function TranslatePage() {
       </div>
 
       {/* 译文输出 — 横向长方形，单列居中 */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+      <div className="bg-[#f4f1ea] rounded-sm border border-[#e2dec9] shadow-sm p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <h2 className="text-sm font-semibold text-[#3d3226] flex items-center gap-2 font-mono tracking-wide">
+            <span className="w-2 h-2 bg-[#4a6b5d]"></span>
             英文译文
           </h2>
           {state.translatedText && (
             <button
               onClick={handleCopy}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#8c7b6a] hover:text-[#5a4c3b] hover:bg-[#e6dfd3] rounded-sm transition-colors"
             >
               {copied ? (
                 <>
-                  <Check size={14} className="text-green-500" />
+                  <Check size={14} className="text-[#4a6b5d]" />
                   已复制
                 </>
               ) : (
@@ -313,25 +314,25 @@ export default function TranslatePage() {
 
         {state.translatedText ? (
           <div
-            className="en-content translated-output w-full min-h-[200px] p-5 border border-slate-200 rounded-xl
-              bg-white overflow-auto leading-relaxed text-[16px] text-slate-700"
+            className="w-full min-h-[200px] p-5 border border-[#e2dec9] rounded-sm
+              bg-[#faf8f5] overflow-auto leading-relaxed text-[16px] text-[#3d3226] font-mono"
           >
             {state.translatedText}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center min-h-[200px] text-center border border-dashed border-slate-200 rounded-xl bg-slate-50/50">
+          <div className="flex flex-col items-center justify-center min-h-[200px] text-center border border-dashed border-[#d8d2c2] rounded-sm bg-[#faf8f5]">
             {state.isTranslating ? (
-              <div className="flex items-center gap-2 text-slate-400">
+              <div className="flex items-center gap-2 text-[#8c7b6a]">
                 <RotateCw size={18} className="animate-spin" />
-                <span className="text-sm">翻译中...</span>
+                <span className="text-sm font-mono">翻译中...</span>
               </div>
             ) : (
               <>
-                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-3">
+                <div className="w-12 h-12 bg-[#f4f1ea] rounded-sm flex items-center justify-center mb-3 border border-[#e2dec9]">
                   <span className="text-xl">🌐</span>
                 </div>
-                <p className="text-slate-400 text-sm">译文将在此显示</p>
-                <p className="text-slate-300 text-xs mt-1">
+                <p className="text-[#8c7b6a] text-sm">译文将在此显示</p>
+                <p className="text-[#b8b09c] text-xs mt-1" style={{ fontFamily: "SimSun, STSong, serif" }}>
                   输入中文后点击「AI 翻译」
                 </p>
               </>
@@ -341,24 +342,24 @@ export default function TranslatePage() {
 
         {/* 规则应用摘要 */}
         {state.appliedRules.length > 0 && (
-          <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-xl">
-            <div className="text-xs font-medium text-green-700 mb-2">
+          <div className="mt-4 p-3 bg-[#f2f5f3] rounded-sm border border-[#d0d9d3]">
+            <div className="text-xs font-medium text-[#3d5a4a] mb-2 font-mono">
               规则自动应用 ({state.appliedRules.length} 条)
             </div>
             <div className="flex flex-wrap gap-1">
               {state.appliedRules.map((rule) => (
                 <span
                   key={rule.id}
-                  className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-md
-                    bg-green-100 text-green-700 border border-green-200"
+                  className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-sm
+                    bg-[#faf8f5] text-[#3d3226] border border-[#e2dec9]"
                 >
                   {rule.name}
-                  <span className="text-green-400">|</span>
-                  <span className="line-through text-green-400 text-[10px]">
+                  <span className="text-[#b8b09c]">|</span>
+                  <span className="line-through text-[#b8b09c] text-[10px]">
                     {rule.original}
                   </span>
                   <span>→</span>
-                  <span className="font-medium">{rule.replaced}</span>
+                  <span className="font-medium font-mono">{rule.replaced}</span>
                 </span>
               ))}
             </div>
@@ -367,15 +368,15 @@ export default function TranslatePage() {
 
         {/* 审校批注摘要 */}
         {state.annotations.length > 0 && (
-          <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-xl">
-            <div className="text-xs font-medium text-red-600 mb-1">
+          <div className="mt-4 p-3 bg-[#fdf5f3] rounded-sm border border-[#e8d0ca]">
+            <div className="text-xs font-medium text-[#8c4a32] mb-1 font-mono">
               审校批注 ({state.annotations.length} 条)
             </div>
-            <p className="text-xs text-red-500">
+            <p className="text-xs text-[#8c7b6a]" style={{ fontFamily: "SimSun, STSong, serif" }}>
               请前往
               <button
                 onClick={() => router.push("/review")}
-                className="text-brand-600 underline mx-1 font-medium"
+                className="text-[#5a4c3b] underline mx-1 font-medium"
               >
                 审校页面
               </button>

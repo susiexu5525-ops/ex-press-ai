@@ -148,8 +148,8 @@ export default function ReviewPage() {
 
       {/* 标题 */}
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center">
-          <Lightbulb size={20} className="text-amber-500" />
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-md shadow-orange-500/20">
+          <Lightbulb size={20} className="text-white" />
         </div>
         <div>
           <h1 className="text-xl font-bold text-slate-800">AI 审校</h1>
@@ -158,13 +158,13 @@ export default function ReviewPage() {
       </div>
 
       {/* 中文原文输入 — 横向长方形，单列居中 */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+      <div className="bg-[#faf8f5] rounded-sm border border-[#e2dec9] shadow-sm p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-brand-500"></span>
+          <h2 className="text-sm font-semibold text-[#3d3226] flex items-center gap-2 font-mono tracking-wide">
+            <span className="w-2 h-2 bg-[#5a4c3b]"></span>
             中文原文
           </h2>
-          <span className="text-xs text-slate-400">可选</span>
+          <span className="text-xs text-[#b8b09c]">可选</span>
         </div>
         <textarea
           value={state.sourceText}
@@ -173,9 +173,10 @@ export default function ReviewPage() {
           }
           placeholder="输入中文原文（可选，用于术语参考）..."
           rows={6}
-          className="review-input w-full p-5 border border-slate-200 rounded-xl
-            bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-400
-            text-slate-700 placeholder:text-slate-300 transition-all"
+          className="w-full p-5 border border-[#e2dec9] rounded-sm
+            bg-[#f4f1ea] focus:outline-none focus:border-[#c9c1ad]
+            text-[#3d3226] placeholder:text-[#b8b09c] transition-colors"
+          style={{ fontFamily: "SimSun, STSong, serif" }}
           spellCheck={false}
         />
 
@@ -185,7 +186,7 @@ export default function ReviewPage() {
             {state.detectedTerms.map((term) => (
               <span
                 key={`${term.id}-${term.start}`}
-                className="inline-flex items-center gap-1 text-xs bg-amber-50 text-amber-700 px-2 py-0.5 rounded-md border border-amber-200"
+                className="inline-flex items-center gap-1 text-xs bg-[#fdf9e7] text-[#3d3226] px-2 py-0.5 rounded-sm border border-[#e8dba0]"
               >
                 {term.zh} → {term.en}
               </span>
@@ -195,18 +196,18 @@ export default function ReviewPage() {
       </div>
 
       {/* 英文译文输入 — 横向长方形，单列居中 */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+      <div className="bg-[#faf8f5] rounded-sm border border-[#e2dec9] shadow-sm p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <h2 className="text-sm font-semibold text-[#3d3226] flex items-center gap-2 font-mono tracking-wide">
+            <span className="w-2 h-2 bg-[#4a6b5d]"></span>
             英文译文
           </h2>
           {state.translatedText ? (
-            <span className="text-xs text-emerald-500 font-medium">
+            <span className="text-xs text-[#4a6b5d] font-medium font-mono">
               已就绪
             </span>
           ) : (
-            <span className="text-xs text-slate-400">可粘贴或从翻译页带入</span>
+            <span className="text-xs text-[#b8b09c]">可粘贴或从翻译页带入</span>
           )}
         </div>
         <textarea
@@ -219,16 +220,16 @@ export default function ReviewPage() {
           }
           placeholder="输入或粘贴英文译文..."
           rows={8}
-          className="en-input review-input w-full p-5 border border-slate-200 rounded-xl
-            bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400
-            text-slate-700 placeholder:text-slate-300 transition-all"
+          className="w-full p-5 border border-[#e2dec9] rounded-sm
+            bg-[#f4f1ea] focus:outline-none focus:border-[#c9c1ad]
+            text-[#3d3226] placeholder:text-[#b8b09c] transition-colors font-mono"
           spellCheck={false}
         />
       </div>
 
       {/* 错误提示 */}
       {error && (
-        <div className="flex items-start gap-2 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-xs">
+        <div className="flex items-start gap-2 p-3 bg-[#fdf0ed] rounded-sm border border-[#e8c4bc] text-[#8c4a32] text-xs">
           <AlertTriangle size={14} className="mt-0.5 shrink-0" />
           <span>{error}</span>
         </div>
@@ -238,7 +239,7 @@ export default function ReviewPage() {
       <div className="flex items-center justify-between">
         <button
           onClick={handleClear}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#8c7b6a] hover:text-[#5a4c3b] hover:bg-[#f4f1ea] rounded-sm transition-colors"
         >
           <Trash2 size={14} />
           清空
@@ -250,9 +251,9 @@ export default function ReviewPage() {
             state.isReviewing ||
             (!state.sourceText.trim() && !state.translatedText.trim())
           }
-          className="flex items-center gap-2 px-6 py-2.5 bg-amber-500 text-white text-sm font-medium
-            rounded-xl hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed
-            transition-all shadow-sm hover:shadow-md active:scale-[0.98]"
+          className="flex items-center gap-2 px-6 py-2.5 bg-[#8c4a32] text-[#faf8f5] text-sm font-medium font-mono
+            rounded-sm hover:bg-[#6b3826] disabled:opacity-50 disabled:cursor-not-allowed
+            transition-colors shadow-sm active:translate-y-px"
         >
           {state.isReviewing ? (
             <>
@@ -269,14 +270,14 @@ export default function ReviewPage() {
       </div>
 
       {/* 审校结果 — 单列居中 */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+      <div className="bg-[#f4f1ea] rounded-sm border border-[#e2dec9] shadow-sm p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-red-500"></span>
+          <h2 className="text-sm font-semibold text-[#3d3226] flex items-center gap-2 font-mono tracking-wide">
+            <span className="w-2 h-2 bg-[#8c4a32]"></span>
             审校结果
           </h2>
           {state.isReviewing && (
-            <span className="text-xs text-amber-500 animate-pulse">
+            <span className="text-xs text-[#8c7b6a] animate-pulse font-mono">
               分析中...
             </span>
           )}
@@ -285,8 +286,8 @@ export default function ReviewPage() {
         {state.annotations.length > 0 && state.translatedText ? (
           <>
             {/* 批注高亮译文 */}
-            <div className="en-content translated-output w-full min-h-[160px] max-h-[360px] p-5 border border-slate-200 rounded-xl
-              bg-white overflow-auto leading-relaxed text-[16px] text-slate-700 mb-5">
+            <div className="w-full min-h-[160px] max-h-[360px] p-5 border border-[#e2dec9] rounded-sm
+              bg-[#faf8f5] overflow-auto leading-relaxed text-[16px] text-[#3d3226] mb-5 font-mono">
               {tokens.map((token, i) => {
                 if (token.type === "text") {
                   return <span key={i}>{token.content}</span>;
@@ -305,8 +306,8 @@ export default function ReviewPage() {
                     {/* Tooltip */}
                     <div
                       className={`
-                        absolute bottom-full left-0 mb-2 w-72 p-3 rounded-xl shadow-xl border z-50
-                        ${cfg.bg || "bg-white border-slate-200"}
+                        absolute bottom-full left-0 mb-2 w-72 p-3 rounded-sm shadow-lg border z-50
+                        ${cfg.bg || "bg-[#faf8f5] border-[#e2dec9]"}
                         transition-all duration-200
                         ${
                           expandedAnnotations[annotation.id]
@@ -318,16 +319,16 @@ export default function ReviewPage() {
                       <div className="flex items-start gap-2">
                         {Icon && <Icon size={16} className={cfg.color} />}
                         <div className="flex-1 min-w-0">
-                          <div className={`text-xs font-semibold mb-1 ${cfg.color}`}>
+                          <div className={`text-xs font-semibold mb-1 font-mono ${cfg.color}`}>
                             {cfg.label}
                           </div>
-                          <p className="text-xs text-slate-700 leading-relaxed mb-2">
+                          <p className="text-xs text-[#3d3226] leading-relaxed mb-2">
                             {annotation.comment}
                           </p>
                           {annotation.suggestion && (
-                            <div className="p-2 bg-white/70 rounded-lg border border-slate-100">
-                              <p className="text-xs text-slate-500 mb-0.5">建议：</p>
-                              <p className="text-xs text-brand-700 font-medium">
+                            <div className="p-2 bg-[#f4f1ea] rounded-sm border border-[#e2dec9]">
+                              <p className="text-xs text-[#8c7b6a] mb-0.5">建议：</p>
+                              <p className="text-xs text-[#5a4c3b] font-medium font-mono">
                                 {annotation.suggestion}
                               </p>
                             </div>
@@ -343,27 +344,27 @@ export default function ReviewPage() {
             {/* 批注列表 */}
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <h3 className="text-xs font-semibold text-slate-600">
+                <h3 className="text-xs font-semibold text-[#3d3226] font-mono">
                   批注列表 ({state.annotations.length})
                 </h3>
                 <div className="flex items-center gap-1.5">
                   {stats.error > 0 && (
-                    <span className="text-[10px] text-red-500 bg-red-50 px-1.5 py-0.5 rounded">
+                    <span className="text-[10px] text-[#8c4a32] bg-[#fdf0ed] px-1.5 py-0.5 rounded-sm font-mono">
                       错误 {stats.error}
                     </span>
                   )}
                   {stats.warning > 0 && (
-                    <span className="text-[10px] text-amber-500 bg-amber-50 px-1.5 py-0.5 rounded">
+                    <span className="text-[10px] text-[#8c7b6a] bg-[#fdf9e7] px-1.5 py-0.5 rounded-sm font-mono">
                       警告 {stats.warning}
                     </span>
                   )}
                   {stats.info > 0 && (
-                    <span className="text-[10px] text-green-500 bg-green-50 px-1.5 py-0.5 rounded">
+                    <span className="text-[10px] text-[#4a6b5d] bg-[#f2f5f3] px-1.5 py-0.5 rounded-sm font-mono">
                       规则 {stats.info}
                     </span>
                   )}
                   {stats.suggestion > 0 && (
-                    <span className="text-[10px] text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded">
+                    <span className="text-[10px] text-[#5a4a6b] bg-[#f4f1f5] px-1.5 py-0.5 rounded-sm font-mono">
                       建议 {stats.suggestion}
                     </span>
                   )}
@@ -379,7 +380,7 @@ export default function ReviewPage() {
                   return (
                     <div
                       key={annotation.id}
-                      className={`p-2.5 rounded-lg border text-xs ${cfg.bg} cursor-pointer transition-all hover:shadow-sm`}
+                      className={`p-2.5 rounded-sm border text-xs ${cfg.bg} cursor-pointer transition-colors hover:shadow-sm`}
                       onClick={() => toggleAnnotation(annotation.id)}
                     >
                       <div className="flex items-start gap-2">
@@ -388,23 +389,23 @@ export default function ReviewPage() {
                         )}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between">
-                            <span className={`font-medium ${cfg.color}`}>
+                            <span className={`font-medium font-mono ${cfg.color}`}>
                               {cfg.label}
                             </span>
                             <ChevronDown
                               size={14}
-                              className={`text-slate-400 transition-transform ${
+                              className={`text-[#b8b09c] transition-transform ${
                                 isExpanded ? "rotate-180" : ""
                               }`}
                             />
                           </div>
-                          <p className="text-slate-600 mt-0.5">
+                          <p className="text-[#5a4c3b] mt-0.5">
                             {annotation.comment}
                           </p>
                           {isExpanded && annotation.suggestion && (
-                            <div className="mt-2 p-2 bg-white/70 rounded border border-slate-100">
-                              <p className="text-slate-500 mb-0.5">修改建议：</p>
-                              <p className="text-brand-700 font-medium">
+                            <div className="mt-2 p-2 bg-[#faf8f5] rounded-sm border border-[#e2dec9]">
+                              <p className="text-[#8c7b6a] mb-0.5">修改建议：</p>
+                              <p className="text-[#5a4c3b] font-medium font-mono">
                                 {annotation.suggestion}
                               </p>
                             </div>
@@ -418,19 +419,19 @@ export default function ReviewPage() {
             </div>
           </>
         ) : (
-          <div className="flex flex-col items-center justify-center min-h-[240px] text-center border border-dashed border-slate-200 rounded-xl bg-slate-50/50">
+          <div className="flex flex-col items-center justify-center min-h-[240px] text-center border border-dashed border-[#d8d2c2] rounded-sm bg-[#faf8f5]">
             {state.isReviewing ? (
-              <div className="flex items-center gap-2 text-slate-400">
+              <div className="flex items-center gap-2 text-[#8c7b6a]">
                 <RotateCw size={18} className="animate-spin" />
-                <span className="text-sm">审校中...</span>
+                <span className="text-sm font-mono">审校中...</span>
               </div>
             ) : (
               <>
-                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-3">
+                <div className="w-12 h-12 bg-[#f4f1ea] rounded-sm flex items-center justify-center mb-3 border border-[#e2dec9]">
                   <span className="text-xl">🔍</span>
                 </div>
-                <p className="text-slate-400 text-sm">审校结果将在此显示</p>
-                <p className="text-slate-300 text-xs mt-1">
+                <p className="text-[#8c7b6a] text-sm">审校结果将在此显示</p>
+                <p className="text-[#b8b09c] text-xs mt-1" style={{ fontFamily: "SimSun, STSong, serif" }}>
                   输入中文原文和英文译文后点击「开始审校」
                 </p>
               </>
@@ -440,8 +441,8 @@ export default function ReviewPage() {
 
         {/* 规则应用摘要 */}
         {state.appliedRules.length > 0 && (
-          <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-xl">
-            <div className="flex items-center gap-1.5 text-xs font-medium text-green-700 mb-2">
+          <div className="mt-4 p-3 bg-[#f2f5f3] rounded-sm border border-[#d0d9d3]">
+            <div className="flex items-center gap-1.5 text-xs font-medium text-[#3d5a4a] mb-2 font-mono">
               <CheckCircle2 size={14} />
               规则自动应用 ({state.appliedRules.length})
             </div>
@@ -449,16 +450,16 @@ export default function ReviewPage() {
               {state.appliedRules.map((rule) => (
                 <span
                   key={rule.id}
-                  className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-md
-                    bg-green-100 text-green-700 border border-green-200"
+                  className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-sm
+                    bg-[#faf8f5] text-[#3d3226] border border-[#e2dec9]"
                 >
                   {rule.name}
-                  <span className="text-green-400">|</span>
-                  <span className="line-through text-green-400 text-[10px]">
+                  <span className="text-[#b8b09c]">|</span>
+                  <span className="line-through text-[#b8b09c] text-[10px]">
                     {rule.original}
                   </span>
                   <span>→</span>
-                  <span className="font-medium">{rule.replaced}</span>
+                  <span className="font-medium font-mono">{rule.replaced}</span>
                 </span>
               ))}
             </div>

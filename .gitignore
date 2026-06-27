@@ -1,6 +1,3 @@
-node_modules/
-.next/
-dist/
-.envnode_modules/
-.next/
-dist/
+.env.local
+node_modules
+.next

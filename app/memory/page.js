@@ -26,13 +26,13 @@ export default function MemoryPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+      <div className="bg-[#faf8f5] rounded-sm border border-[#e2dec9] shadow-[0_2px_10px_rgba(0,0,0,0.06)] p-6">
         <div className="flex flex-col items-center justify-center min-h-[300px] text-center">
-          <div className="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center mb-4">
-            <ShieldCheck size={32} className="text-purple-400" />
+          <div className="w-16 h-16 bg-[#29ABE2]/10 rounded-sm flex items-center justify-center mb-4">
+            <ShieldCheck size={32} className="text-[#29ABE2]" />
           </div>
-          <h2 className="text-lg font-semibold text-slate-700 mb-2">规则管理</h2>
-          <p className="text-slate-400 text-sm max-w-md">
+          <h2 className="text-lg font-semibold text-slate-700 mb-2 font-mono">规则管理</h2>
+          <p className="text-slate-400 text-sm max-w-md font-mono">
             在首页点击"规则库"按钮可以打开规则管理器弹窗，配置翻译和审校的强制规范规则。
           </p>
         </div>

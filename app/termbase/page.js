@@ -26,12 +26,12 @@ export default function TermbasePage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+      <div className="bg-white/60 backdrop-blur-md rounded-2xl border border-white/50 shadow-lg shadow-slate-200/50 p-6">
         <div className="flex flex-col items-center justify-center min-h-[300px] text-center">
           <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mb-4">
-            <BookOpen size={32} className="text-emerald-400" />
+            <BookOpen size={32} className="text-emerald-500" />
           </div>
-          <h2 className="text-lg font-semibold text-slate-700 mb-2">术语管理</h2>
+          <h2 className="text-lg font-semibold text-slate-800 mb-2">术语管理</h2>
           <p className="text-slate-400 text-sm max-w-md">
             在首页点击"术语库"按钮可以打开术语管理器弹窗，添加和编辑高校外宣常用术语翻译。
           </p>

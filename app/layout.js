@@ -1,5 +1,6 @@
 import "./globals.css";
 import AppProvider from "./components/AppProvider";
+import ColorMeshBackground from "./components/ColorMeshBackground";
 
 export const metadata = {
   title: "ExPress AI — 高校外宣新闻翻译与审校",
@@ -9,8 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="zh-CN">
-      <body className="min-h-screen bg-slate-50">
+      <body className="relative min-h-screen">
         <AppProvider>{children}</AppProvider>
+        <ColorMeshBackground />
       </body>
     </html>
   );

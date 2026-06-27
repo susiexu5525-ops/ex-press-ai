@@ -102,33 +102,33 @@ export default function RuleManager() {
     : rules;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 animate-fade-in">
+      <div className="bg-[#faf8f5] rounded-sm shadow-[0_2px_10px_rgba(0,0,0,0.12)] w-full max-w-2xl max-h-[80vh] flex flex-col animate-fade-in border border-[#e2dec9]">
         {/* Header */}
-        <div className="flex items-center justify-between p-5 border-b border-slate-100">
+        <div className="flex items-center justify-between p-5 border-b border-[#e2dec9]">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-red-100 rounded-xl flex items-center justify-center">
-              <ShieldCheck size={18} className="text-red-600" />
+            <div className="w-9 h-9 bg-[#F15A24]/15 rounded-sm flex items-center justify-center">
+              <ShieldCheck size={18} className="text-[#F15A24]" />
             </div>
             <div>
-              <h2 className="text-base font-semibold text-slate-800">
+              <h2 className="text-base font-semibold text-slate-700 font-mono">
                 规则库管理
               </h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-400 font-mono">
                 {rules.length} 条规则 | 译文生成后自动应用
               </p>
             </div>
           </div>
           <button
             onClick={handleClose}
-            className="p-2 hover:bg-slate-100 rounded-xl transition-colors"
+            className="p-2 hover:bg-[#f4f1ea] rounded-sm transition-colors"
           >
             <X size={18} className="text-slate-400" />
           </button>
         </div>
 
         {/* Search */}
-        <div className="p-4 border-b border-slate-100">
+        <div className="p-4 border-b border-[#e2dec9]">
           <div className="flex items-center gap-2">
             <div className="relative flex-1">
               <Search
@@ -140,14 +140,14 @@ export default function RuleManager() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="搜索规则..."
-                className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-xl
-                  focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-400"
+                className="w-full pl-9 pr-4 py-2 text-sm border border-[#e2dec9] rounded-sm
+                  focus:outline-none focus:ring-1 focus:ring-amber-700/30 focus:border-amber-700/40 bg-white"
               />
             </div>
             <button
               onClick={() => setShowForm(!showForm)}
-              className="flex items-center gap-1.5 px-3 py-2 text-sm bg-brand-600 text-white
-                rounded-xl hover:bg-brand-700 transition-colors font-medium"
+              className="flex items-center gap-1.5 px-3 py-2 text-sm bg-[#F15A24]/80 text-white
+                rounded-sm hover:bg-[#F15A24] transition-colors font-medium font-mono"
             >
               <Plus size={16} />
               新增
@@ -156,22 +156,22 @@ export default function RuleManager() {
 
           {/* Add Form */}
           {showForm && (
-            <div className="mt-3 p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+            <div className="mt-3 p-3 bg-[#f4f1ea] rounded-sm border border-[#e2dec9] space-y-2">
               <div className="grid grid-cols-2 gap-2">
                 <input
                   type="text"
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
                   placeholder="规则名称（如：校名统一）"
-                  className="px-3 py-1.5 text-sm border border-slate-200 rounded-lg
-                    focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-400"
+                  className="px-3 py-1.5 text-sm border border-[#e2dec9] rounded-sm bg-white
+                    focus:outline-none focus:ring-1 focus:ring-amber-700/30 focus:border-amber-700/40"
                 />
                 <div className="flex items-center gap-2">
                   <select
                     value={formType}
                     onChange={(e) => setFormType(e.target.value)}
-                    className="flex-1 px-2 py-1.5 text-sm border border-slate-200 rounded-lg
-                      focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+                    className="flex-1 px-2 py-1.5 text-sm border border-[#e2dec9] rounded-sm bg-white
+                      focus:outline-none focus:ring-1 focus:ring-amber-700/30"
                   >
                     <option value="school">学校规范</option>
                     <option value="mentor">导师规范</option>
@@ -179,8 +179,8 @@ export default function RuleManager() {
                   <select
                     value={formSeverity}
                     onChange={(e) => setFormSeverity(e.target.value)}
-                    className="flex-1 px-2 py-1.5 text-sm border border-slate-200 rounded-lg
-                      focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+                    className="flex-1 px-2 py-1.5 text-sm border border-[#e2dec9] rounded-sm bg-white
+                      focus:outline-none focus:ring-1 focus:ring-amber-700/30"
                   >
                     <option value="强制">强制</option>
                     <option value="建议">建议</option>
@@ -193,16 +193,16 @@ export default function RuleManager() {
                   value={formPattern}
                   onChange={(e) => setFormPattern(e.target.value)}
                   placeholder="匹配模式（支持正则）"
-                  className="px-3 py-1.5 text-sm border border-slate-200 rounded-lg font-mono
-                    focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-400"
+                  className="px-3 py-1.5 text-sm border border-[#e2dec9] rounded-sm bg-white font-mono
+                    focus:outline-none focus:ring-1 focus:ring-amber-700/30 focus:border-amber-700/40"
                 />
                 <input
                   type="text"
                   value={formReplacement}
                   onChange={(e) => setFormReplacement(e.target.value)}
                   placeholder="替换为..."
-                  className="px-3 py-1.5 text-sm border border-slate-200 rounded-lg
-                    focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-400"
+                  className="px-3 py-1.5 text-sm border border-[#e2dec9] rounded-sm bg-white
+                    focus:outline-none focus:ring-1 focus:ring-amber-700/30 focus:border-amber-700/40"
                 />
               </div>
               <textarea
@@ -210,21 +210,21 @@ export default function RuleManager() {
                 onChange={(e) => setFormNote(e.target.value)}
                 placeholder="规则说明..."
                 rows={2}
-                className="w-full px-3 py-1.5 text-sm border border-slate-200 rounded-lg
-                  focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-400 resize-none"
+                className="w-full px-3 py-1.5 text-sm border border-[#e2dec9] rounded-sm bg-white
+                  focus:outline-none focus:ring-1 focus:ring-amber-700/30 focus:border-amber-700/40 resize-none"
               />
               <div className="flex items-center justify-end gap-2">
                 <button
                   onClick={resetForm}
-                  className="px-3 py-1.5 text-xs text-slate-500 hover:bg-slate-200 rounded-lg transition-colors"
+                  className="px-3 py-1.5 text-xs text-slate-500 hover:bg-[#e6dfd3] rounded-sm transition-colors font-mono"
                 >
                   取消
                 </button>
                 <button
                   onClick={handleAdd}
                   disabled={!formName.trim() || !formPattern.trim()}
-                  className="px-4 py-1.5 text-xs bg-brand-600 text-white rounded-lg
-                    hover:bg-brand-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                  className="px-4 py-1.5 text-xs bg-amber-700/80 text-white rounded-sm
+                    hover:bg-amber-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors font-mono"
                 >
                   添加规则
                 </button>
@@ -239,17 +239,17 @@ export default function RuleManager() {
             {filtered.map((rule) => (
               <div
                 key={rule.id}
-                className="p-3 rounded-xl border border-slate-100 hover:border-slate-200 hover:shadow-sm
-                  transition-all group"
+                className="p-3 rounded-sm border border-[#e2dec9] hover:border-[#d6cfc0] hover:shadow-[0_2px_10px_rgba(0,0,0,0.06)]
+                  transition-all group bg-white"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1.5">
-                      <h4 className="text-sm font-medium text-slate-700">
+                      <h4 className="text-sm font-medium text-slate-700 font-mono">
                         {rule.name}
                       </h4>
                       <span
-                        className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium border ${
+                        className={`text-[10px] px-1.5 py-0.5 rounded-sm font-medium border font-mono ${
                           severityColors[rule.severity] ||
                           "bg-slate-100 text-slate-600 border-slate-200"
                         }`}
@@ -261,20 +261,20 @@ export default function RuleManager() {
                         )}
                         {rule.severity}
                       </span>
-                      <span className="text-[10px] text-slate-400 bg-slate-50 px-1.5 py-0.5 rounded-full">
+                      <span className="text-[10px] text-slate-400 bg-[#f4f1ea] px-1.5 py-0.5 rounded-sm font-mono">
                         {typeLabels[rule.type] || rule.type}
                       </span>
                     </div>
 
                     {rule.pattern && (
                       <div className="flex items-center gap-2 text-xs mb-1.5">
-                        <code className="px-2 py-0.5 bg-red-50 text-red-600 rounded font-mono text-[11px]">
+                        <code className="px-2 py-0.5 bg-red-50 text-red-600 rounded-sm font-mono text-[11px]">
                           {rule.pattern}
                         </code>
                         {rule.replacement && (
                           <>
                             <span className="text-slate-300">→</span>
-                            <code className="px-2 py-0.5 bg-green-50 text-green-600 rounded font-mono text-[11px]">
+                            <code className="px-2 py-0.5 bg-green-50 text-green-600 rounded-sm font-mono text-[11px]">
                               {rule.replacement}
                             </code>
                           </>
@@ -283,7 +283,7 @@ export default function RuleManager() {
                     )}
 
                     {rule.note && (
-                      <p className="text-xs text-slate-400 leading-relaxed">
+                      <p className="text-xs text-slate-400 leading-relaxed font-mono">
                         {rule.note}
                       </p>
                     )}
@@ -291,7 +291,7 @@ export default function RuleManager() {
 
                   <button
                     onClick={() => handleDelete(rule.id)}
-                    className="p-1.5 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-lg
+                    className="p-1.5 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-sm
                       opacity-0 group-hover:opacity-100 transition-all"
                     title="删除"
                   >
@@ -301,7 +301,7 @@ export default function RuleManager() {
               </div>
             ))}
             {filtered.length === 0 && (
-              <div className="text-center py-8 text-slate-400 text-sm">
+              <div className="text-center py-8 text-slate-400 text-sm font-mono">
                 {search ? "没有匹配的规则" : "规则库为空，请添加规则"}
               </div>
             )}
@@ -309,10 +309,10 @@ export default function RuleManager() {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between p-4 border-t border-slate-100">
+        <div className="flex items-center justify-between p-4 border-t border-[#e2dec9]">
           <button
             onClick={handleReset}
-            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-red-500 transition-colors"
+            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-red-500 transition-colors font-mono"
           >
             <Undo2 size={13} />
             恢复默认
@@ -320,13 +320,13 @@ export default function RuleManager() {
           <div className="flex items-center gap-2">
             <button
               onClick={handleClose}
-              className="px-4 py-2 text-sm text-slate-500 hover:bg-slate-100 rounded-xl transition-colors"
+              className="px-4 py-2 text-sm text-slate-500 hover:bg-[#f4f1ea] rounded-sm transition-colors font-mono"
             >
               取消
             </button>
             <button
               onClick={handleSave}
-              className="px-4 py-2 text-sm bg-brand-600 text-white rounded-xl hover:bg-brand-700 transition-colors font-medium"
+              className="px-4 py-2 text-sm bg-amber-700/80 text-white rounded-sm hover:bg-amber-800 transition-colors font-medium font-mono"
             >
               保存
             </button>

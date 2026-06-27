@@ -4,8 +4,6 @@
 
 :root {
   --brand-600: #1d4ed8;
-  --font-zh: "SimSun", "宋体", serif;
-  --font-en: "Times New Roman", "Times", serif;
 }
 
 * {
@@ -14,40 +12,16 @@
 
 body {
   margin: 0;
-  font-family: "SimSun", "宋体", "Times New Roman", "Times", serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: #f8fafc;
-  color: #1e293b;
+  color: #334155;
 }
 
-/* ===== 全局字体规则 ===== */
-
-/* 中文内容默认使用宋体 */
-[lang="zh-CN"],
-[lang="zh"],
-.lang-zh,
-textarea.lang-zh,
-input.lang-zh {
-  font-family: "SimSun", "宋体", serif;
-}
-
-/* 英文内容使用 Times New Roman */
-.lang-en,
-textarea.lang-en,
-input.lang-en {
-  font-family: "Times New Roman", "Times", serif;
-}
-
-/* 所有输入框、textarea 默认使用宋体（因为项目主要输入中文） */
-textarea,
-input[type="text"],
-input[type="search"] {
-  font-family: "SimSun", "宋体", serif;
-}
-
-/* 英文译文区域使用 Times New Roman */
-.en-content,
-.translated-output {
-  font-family: "Times New Roman", "Times", serif;
+/* ===== 噪声颗粒纹理 ===== */
+.noise-texture {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
 }
 
 /* ===== 全局布局工具类 ===== */
@@ -142,13 +116,7 @@ textarea.review-input {
   resize: vertical;
   line-height: 1.8;
   font-size: 16px;
-  font-family: "SimSun", "宋体", serif;
   min-height: 200px;
-}
-
-/* 英文输入区域字体 */
-textarea.en-input {
-  font-family: "Times New Roman", "Times", serif;
 }
 
 /* 动画 */
